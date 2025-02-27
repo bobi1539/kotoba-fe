@@ -44,15 +44,21 @@ export default function Home() {
         // Shuffle using Fisher-Yates
         shuffleFisherYates(numbers);
 
-        // ${selectedAnswer?.id === answer.id ? (answer.id === question?.id ? "border-green-500" : "border-red-500") : "border-gray-800"}
-
         // Get a `count` number of unique numbers
         return numbers.slice(0, count);
     };
 
+    const getQuestionClassName = (): string => {
+        if (selectedAnswer) {
+            return selectedAnswer.id === question?.id ? "border-green-500" : "border-red-700";
+        }
+        return "";
+    };
+
     return (
-        <section className="border border-red-500 bg-gray-100 w-full h-screen grid grid-cols-2 gap-20 pt-52">
-            <div className="border border-gray-800 w-[450px] h-[450px] bg-white flex justify-center items-center justify-self-end">
+        <section className="bg-gray-100 w-full h-screen grid grid-cols-2 gap-20 pt-52">
+            <div className={`${getQuestionClassName()} relative border w-[450px] h-[450px] bg-white flex justify-center items-center justify-self-end`}>
+                {selectedAnswer && <div className={`${getQuestionClassName()} absolute w-full h-full border-6`} />}
                 <p className="text-[100px]">{question?.kanji}</p>
             </div>
             <div className="w-[450px] h-[450px] grid grid-cols-3 gap-3">
@@ -64,8 +70,8 @@ export default function Home() {
                             classAnswerParent = "border-green-500";
                             classAnswerChilds = "border-4 border-green-500";
                         } else {
-                            classAnswerParent = "border-red-500";
-                            classAnswerChilds = "border-4 border-red-500";
+                            classAnswerParent = "border-red-700";
+                            classAnswerChilds = "border-4 border-red-700";
                         }
                     }
                     return (
