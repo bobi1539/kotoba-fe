@@ -5,6 +5,13 @@ import { shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
 import { kotobaKanjiList } from "./data/data";
 
+interface SelectedAnswer {
+    isCorrect: boolean;
+    borderParent: string;
+    borderChild: string;
+    icon: string;
+}
+
 export default function Home() {
     const [question, setQuestion] = useState<KotobaKanji>();
     const [answers, setAnswers] = useState<KotobaKanji[]>([]);
@@ -55,10 +62,28 @@ export default function Home() {
         return "";
     };
 
+    const handleClickAnswer = (answer: KotobaKanji): void => {
+		setSelectedAnswer(answer);
+		// if (answer.id === question?.id) {
+		// 	setSelectedAnswer({
+		// 		isCorrect: true,
+		// 		borderParent: "border-green-500",
+		// 		borderChild: "border-red-500"
+		// 	})
+		// }
+    };
+
     return (
         <section className="bg-gray-100 w-full h-screen grid grid-cols-2 gap-20 pt-52">
             <div className={`${getQuestionClassName()} relative border w-[450px] h-[450px] bg-white flex justify-center items-center justify-self-end`}>
-                {selectedAnswer && <div className={`${getQuestionClassName()} absolute w-full h-full border-6`} />}
+                {selectedAnswer && (
+                    <>
+                        <div className={`${getQuestionClassName()} absolute w-full h-full border-6`} />
+                        <div className="absolute left-0 top-0 bg-red-700 w-9 h-9 flex justify-center items-center">
+                            <i className="fa-solid fa-xmark text-2xl text-white" />
+                        </div>
+                    </>
+                )}
                 <p className="text-[100px]">{question?.kanji}</p>
             </div>
             <div className="w-[450px] h-[450px] grid grid-cols-3 gap-3">
@@ -75,7 +100,7 @@ export default function Home() {
                         }
                     }
                     return (
-                        <div key={answer.id} onClick={() => setSelectedAnswer(answer)} className={`${classAnswerParent} relative border bg-white flex justify-center items-center p-3 hover:cursor-pointer`}>
+                        <div key={answer.id} onClick={() => handleClickAnswer(answer)} className={`${classAnswerParent} relative border bg-white flex justify-center items-center p-3 hover:cursor-pointer`}>
                             <div className={`${classAnswerChilds} absolute w-full h-full`} />
                             <div>
                                 <p className="text-center font-light text-gray-900 capitalize">{answer.meaning}</p>
