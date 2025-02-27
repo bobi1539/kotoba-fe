@@ -79,7 +79,7 @@ export default function Home() {
         setAnswerStatus((prevState) => ({
             correct: prevState.correct + 1,
             incorrect: prevState.incorrect,
-            remaining: prevState.remaining,
+            remaining: prevState.remaining - 1,
             completionPercentage: prevState.completionPercentage,
         }));
     };
@@ -96,7 +96,7 @@ export default function Home() {
         setAnswerStatus((prevState) => ({
             correct: prevState.correct,
             incorrect: prevState.incorrect + 1,
-            remaining: prevState.remaining,
+            remaining: prevState.remaining - 1,
             completionPercentage: prevState.completionPercentage,
         }));
     };
