@@ -209,4 +209,46 @@ const kotobaKanjiList: KotobaKanji[] = [
         hiragana: "つくえ",
         meaning: "meja",
     },
+    {
+        id: 35,
+        kanji: "日本人",
+        hiragana: "にほんじん",
+        meaning: "orang jepang",
+    },
+    {
+        id: 36,
+        kanji: "日",
+        hiragana: "ひ",
+        meaning: "matahari/hari",
+    },
+    {
+        id: 37,
+        kanji: "休日",
+        hiragana: "きゅうじつ",
+        meaning: "hari libur",
+    },
+    {
+        id: 38,
+        kanji: "日本",
+        hiragana: "にほん",
+        meaning: "jepang",
+    },
+    {
+        id: 39,
+        kanji: "三日",
+        hiragana: "みっか",
+        meaning: "tiga hari",
+    },
+    {
+        id: 40,
+        kanji: "今日",
+        hiragana: "きょう",
+        meaning: "hari ini",
+    },
+    {
+        id: 41,
+        kanji: "毎日",
+        hiragana: "まいにち",
+        meaning: "setiap hari",
+    },
 ];
