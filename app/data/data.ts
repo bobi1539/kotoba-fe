@@ -167,4 +167,46 @@ const kotobaKanjiList: KotobaKanji[] = [
         hiragana: "にちようび",
         meaning: "minggu",
     },
+    {
+        id: 28,
+        kanji: "山",
+        hiragana: "やま",
+        meaning: "gunung",
+    },
+    {
+        id: 29,
+        kanji: "川",
+        hiragana: "かわ",
+        meaning: "sungai",
+    },
+    {
+        id: 30,
+        kanji: "花",
+        hiragana: "はな",
+        meaning: "bunga",
+    },
+    {
+        id: 31,
+        kanji: "雨",
+        hiragana: "あめ",
+        meaning: "hujan",
+    },
+    {
+        id: 32,
+        kanji: "空",
+        hiragana: "そら",
+        meaning: "langit",
+    },
+    {
+        id: 33,
+        kanji: "雪",
+        hiragana: "ゆき",
+        meaning: "salju",
+    },
+    {
+        id: 34,
+        kanji: "机",
+        hiragana: "つくえ",
+        meaning: "meja",
+    },
 ];
