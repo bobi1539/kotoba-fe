@@ -116,7 +116,7 @@ export default function Home() {
     };
 
     return (
-        <section className="bg-gray-100 pb-24 lg:pb-0 lg:h-screen">
+        <section className="bg-gray-100 h-screen">
             <div className="flex justify-between bg-gray-200 border-gray-500 font-light">
                 <div></div>
                 <div className="bg-gray-300 p-2 flex justify-between gap-4 px-10">
@@ -127,7 +127,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 pt-10 lg:pt-52">
-                <div className={`${selectedAnswer?.borderParent} relative border w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] bg-white flex justify-center items-center justify-self-center lg:justify-self-end`}>
+                <div className={`${selectedAnswer?.borderParent} relative border w-[350px] h-[180px] lg:w-[450px] lg:h-[450px] bg-white flex justify-center items-center justify-self-center lg:justify-self-end`}>
                     {selectedAnswer && (
                         <>
                             <div className={`${selectedAnswer.borderChild} absolute w-full h-full border-6`} />
@@ -136,7 +136,7 @@ export default function Home() {
                             </div>
                         </>
                     )}
-                    <p className="text-[70px] lg:text-[100px]">{question?.kanji}</p>
+                    <p className="text-[50px] lg:text-[100px]">{question?.kanji}</p>
                 </div>
                 <div className="w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] grid grid-cols-3 gap-3 justify-self-center lg:justify-self-start">
                     {answers.map((answer) => (
