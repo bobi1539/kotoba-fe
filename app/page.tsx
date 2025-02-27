@@ -25,7 +25,7 @@ export default function Home() {
         if (nextQuestion >= kotobaKanjiList.length) {
             alert("Selesai.");
             setNextQuestion(0);
-            setAnswerStatus(startingAnswerStatus())
+            setAnswerStatus(startingAnswerStatus());
             shuffleFisherYates(kotobaKanjiList);
             return;
         }
