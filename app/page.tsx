@@ -1,111 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-interface KotobaKanji {
-    id: number;
-    kanji: string;
-    hiragana: string;
-    meaning: string;
-}
+import { shuffleFisherYates } from "./util/helper";
+import { KotobaKanji } from "./dto/kotoba-kanji";
+import { kotobaKanjiList } from "./data/data";
 
 export default function Home() {
     const [question, setQuestion] = useState<KotobaKanji>();
     const [answers, setAnswers] = useState<KotobaKanji[]>([]);
+    const [selectedAnswer, setSelectedAnswer] = useState<KotobaKanji>();
 
     useEffect(() => {
-        const kotobaKanjiList: KotobaKanji[] = [
-            {
-                id: 1,
-                kanji: "家",
-                hiragana: "いえ",
-                meaning: "rumah",
-            },
-            {
-                id: 2,
-                kanji: "友達",
-                hiragana: "ともだち",
-                meaning: "teman",
-            },
-            {
-                id: 3,
-                kanji: "猫",
-                hiragana: "ねこ",
-                meaning: "kucing",
-            },
-            {
-                id: 4,
-                kanji: "犬",
-                hiragana: "いぬ",
-                meaning: "anjing",
-            },
-            {
-                id: 5,
-                kanji: "車",
-                hiragana: "くるま",
-                meaning: "mobil",
-            },
-            {
-                id: 6,
-                kanji: "靴",
-                hiragana: "くつ",
-                meaning: "sepatu",
-            },
-            {
-                id: 7,
-                kanji: "傘",
-                hiragana: "かさ",
-                meaning: "payung",
-            },
-            {
-                id: 8,
-                kanji: "食べ物",
-                hiragana: "たべもの",
-                meaning: "makanan",
-            },
-            {
-                id: 9,
-                kanji: "水",
-                hiragana: "みず",
-                meaning: "air",
-            },
-            {
-                id: 10,
-                kanji: "火",
-                hiragana: "ひ",
-                meaning: "api",
-            },
-            {
-                id: 11,
-                kanji: "本",
-                hiragana: "ほん",
-                meaning: "buku",
-            },
-            {
-                id: 12,
-                kanji: "本屋",
-                hiragana: "ほにや",
-                meaning: "toko buku",
-            },
-            {
-                id: 13,
-                kanji: "切符",
-                hiragana: "きっぷ",
-                meaning: "tiket",
-            },
-            {
-                id: 14,
-                kanji: "学生",
-                hiragana: "がくせい",
-                meaning: "murid",
-            },
-            {
-                id: 15,
-                kanji: "先生",
-                hiragana: "せんせい",
-                meaning: "guru",
-            },
-        ];
         const range = kotobaKanjiList.length - 1;
 
         // Take one question at random
@@ -137,12 +42,12 @@ export default function Home() {
         }
 
         // Shuffle using Fisher-Yates
-        for (let i = numbers.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-        }
+        shuffleFisherYates(numbers);
 
-        return numbers.slice(0, count); // Get a `count` number of unique numbers
+        // ${selectedAnswer?.id === answer.id ? (answer.id === question?.id ? "border-green-500" : "border-red-500") : "border-gray-800"}
+
+        // Get a `count` number of unique numbers
+        return numbers.slice(0, count);
     };
 
     return (
@@ -151,14 +56,28 @@ export default function Home() {
                 <p className="text-[100px]">{question?.kanji}</p>
             </div>
             <div className="w-[450px] h-[450px] grid grid-cols-3 gap-3">
-                {answers.map((answer) => (
-                    <div key={answer.id} className="border border-gray-800 bg-white flex justify-center items-center p-3 hover:cursor-pointer">
-                        <div>
-                            <p className="text-center font-light text-gray-900 capitalize">{answer.meaning}</p>
-                            <p className="text-center font-light text-gray-700 text-sm">{answer.hiragana}</p>
+                {answers.map((answer) => {
+                    let classAnswerParent = "border-gray-800";
+                    let classAnswerChilds = "border-gray-800";
+                    if (answer.id === selectedAnswer?.id) {
+                        if (answer.id === question?.id) {
+                            classAnswerParent = "border-green-500";
+                            classAnswerChilds = "border-4 border-green-500";
+                        } else {
+                            classAnswerParent = "border-red-500";
+                            classAnswerChilds = "border-4 border-red-500";
+                        }
+                    }
+                    return (
+                        <div key={answer.id} onClick={() => setSelectedAnswer(answer)} className={`${classAnswerParent} relative border bg-white flex justify-center items-center p-3 hover:cursor-pointer`}>
+                            <div className={`${classAnswerChilds} absolute w-full h-full`} />
+                            <div>
+                                <p className="text-center font-light text-gray-900 capitalize">{answer.meaning}</p>
+                                <p className="text-center font-light text-gray-700 text-sm">{answer.hiragana}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </section>
     );
