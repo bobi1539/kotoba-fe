@@ -116,7 +116,7 @@ export default function Home() {
     };
 
     return (
-        <section className="bg-gray-100 h-screen">
+        <section className="bg-gray-100 pb-24 lg:pb-0 lg:h-screen">
             <div className="flex justify-between bg-gray-200 border-gray-500 font-light">
                 <div></div>
                 <div className="bg-gray-300 p-2 flex justify-between gap-4 px-10">
@@ -126,8 +126,8 @@ export default function Home() {
                     <h1>{answerStatus.correctPercentage}%</h1>
                 </div>
             </div>
-            <div className="w-full grid grid-cols-2 gap-20 pt-52">
-                <div className={`${selectedAnswer?.borderParent} relative border w-[450px] h-[450px] bg-white flex justify-center items-center justify-self-end`}>
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 pt-10 lg:pt-52">
+                <div className={`${selectedAnswer?.borderParent} relative border w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] bg-white flex justify-center items-center justify-self-center lg:justify-self-end`}>
                     {selectedAnswer && (
                         <>
                             <div className={`${selectedAnswer.borderChild} absolute w-full h-full border-6`} />
@@ -136,9 +136,9 @@ export default function Home() {
                             </div>
                         </>
                     )}
-                    <p className="text-[100px]">{question?.kanji}</p>
+                    <p className="text-[70px] lg:text-[100px]">{question?.kanji}</p>
                 </div>
-                <div className="w-[450px] h-[450px] grid grid-cols-3 gap-3">
+                <div className="w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] grid grid-cols-3 gap-3 justify-self-center lg:justify-self-start">
                     {answers.map((answer) => (
                         <button key={answer.id} disabled={isButtonAnswerDisabled} onClick={() => handleClickAnswer(answer)} className={`${answer.id === selectedAnswer?.answer.id && selectedAnswer?.borderParent} relative border bg-white flex justify-center items-center p-3 hover:cursor-pointer`}>
                             {selectedAnswer && (
@@ -150,14 +150,14 @@ export default function Home() {
                                 </>
                             )}
                             <div>
-                                <p className="text-center font-light text-gray-900 capitalize">{answer.meaning}</p>
-                                <p className="text-center font-light text-gray-700 text-sm">{answer.hiragana}</p>
+                                <p className="text-center font-light text-gray-900 capitalize text-sm lg:text-base">{answer.meaning}</p>
+                                <p className="text-center font-light text-gray-700 text-xs lg:text-sm">{answer.hiragana}</p>
                             </div>
                         </button>
                     ))}
                 </div>
             </div>
-            <div className="flex justify-center my-10">
+            <div className="flex justify-center my-5 lg:my-10">
                 <button onClick={handleClickNext} disabled={isButtonNextDisabled} className={`${isButtonNextDisabled ? "bg-gray-500" : "bg-gray-500 hover:bg-gray-600 cursor-pointer"} px-10 py-2 text-white rounded`}>
                     Next
                 </button>
