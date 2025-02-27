@@ -16,14 +16,12 @@ export default function Home() {
     const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus());
 
     const randomizeQuestion = useCallback((): void => {
-        const range = kotobaKanjiList.length - 1;
-
         // Take one question at random
-        const randomQuestionIndex: number = Math.floor(Math.random() * (range + 1));
+        const randomQuestionIndex: number = Math.floor(Math.random() * kotobaKanjiList.length);
         const randomQuestion: KotobaKanji = kotobaKanjiList[randomQuestionIndex];
 
         // Take 8 unique numbers (since 1 is already taken as a question)
-        const randomNumbers = getUniqueRandomNumbers(0, range, 8, randomQuestionIndex);
+        const randomNumbers = getUniqueRandomNumbers(0, kotobaKanjiList.length - 1, 8, randomQuestionIndex);
 
         // Add `randomQuestion` to answers
         const randomAnswers: KotobaKanji[] = [randomQuestion, ...randomNumbers.map((num) => kotobaKanjiList[num])];
@@ -62,7 +60,7 @@ export default function Home() {
             correct: prevState.correct + 1,
             incorrect: prevState.incorrect,
             remaining: prevState.remaining - 1,
-            completionPercentage: prevState.completionPercentage,
+            completionPercentage: calculateCompletionPercentage(prevState.correct + 1, prevState.incorrect),
         }));
     };
 
@@ -79,8 +77,13 @@ export default function Home() {
             correct: prevState.correct,
             incorrect: prevState.incorrect + 1,
             remaining: prevState.remaining,
-            completionPercentage: prevState.completionPercentage,
+            completionPercentage: calculateCompletionPercentage(prevState.correct, prevState.incorrect + 1),
         }));
+    };
+
+    const calculateCompletionPercentage = (correct: number, incorrect: number): number => {
+        const total = correct + incorrect;
+        return Math.floor((correct / total) * 100);
     };
 
     const handleClickNext = (): void => {
