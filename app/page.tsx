@@ -5,6 +5,7 @@ import { shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
 import { kotobaKanjiList } from "./data/data";
 import { SelectedAnswer } from "./dto/selected-answer";
+import { AnswerStatus, startingAnswerStatus } from "./dto/answer-status";
 
 export default function Home() {
     const [question, setQuestion] = useState<KotobaKanji>();
@@ -12,6 +13,7 @@ export default function Home() {
     const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>();
     const [isButtonAnswerDisabled, setIsButtonAnswerDisabled] = useState<boolean>(false);
     const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
+    const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus());
 
     const randomizeQuestion = useCallback((): void => {
         const range = kotobaKanjiList.length - 1;
@@ -57,26 +59,46 @@ export default function Home() {
 
     const handleClickAnswer = (answer: KotobaKanji): void => {
         if (answer.id === question?.id) {
-            setSelectedAnswer({
-                isCorrect: true,
-                borderParent: "border-green-500",
-                borderChild: "border-4 border-green-500",
-                bgColor: "bg-green-500",
-                icon: "fa-solid fa-check",
-                answer: answer,
-            });
+            setCorrectAnswer(answer);
         } else {
-            setSelectedAnswer({
-                isCorrect: false,
-                borderParent: "border-red-700",
-                borderChild: "border-4 border-red-700",
-                bgColor: "bg-red-700",
-                icon: "fa-solid fa-xmark",
-                answer: answer,
-            });
+            setIncorrectAnswer(answer);
         }
         setIsButtonAnswerDisabled(!isButtonAnswerDisabled);
         setIsButtonNextDisabled(!isButtonNextDisabled);
+    };
+
+    const setCorrectAnswer = (answer: KotobaKanji): void => {
+        setSelectedAnswer({
+            isCorrect: true,
+            borderParent: "border-green-500",
+            borderChild: "border-4 border-green-500",
+            bgColor: "bg-green-500",
+            icon: "fa-solid fa-check",
+            answer: answer,
+        });
+        setAnswerStatus((prevState) => ({
+            correct: prevState.correct + 1,
+            incorrect: prevState.incorrect,
+            remaining: prevState.remaining,
+            completionPercentage: prevState.completionPercentage,
+        }));
+    };
+
+    const setIncorrectAnswer = (answer: KotobaKanji): void => {
+        setSelectedAnswer({
+            isCorrect: false,
+            borderParent: "border-red-700",
+            borderChild: "border-4 border-red-700",
+            bgColor: "bg-red-700",
+            icon: "fa-solid fa-xmark",
+            answer: answer,
+        });
+        setAnswerStatus((prevState) => ({
+            correct: prevState.correct,
+            incorrect: prevState.incorrect + 1,
+            remaining: prevState.remaining,
+            completionPercentage: prevState.completionPercentage,
+        }));
     };
 
     const handleClickNext = (): void => {
@@ -88,6 +110,15 @@ export default function Home() {
 
     return (
         <section className="bg-gray-100 h-screen">
+            <div className="flex justify-between bg-gray-200 border-gray-500 font-light">
+                <div></div>
+                <div className="bg-gray-300 p-2 flex justify-between gap-4 px-10">
+                    <h1>Benar : {answerStatus.correct}</h1>
+                    <h1>Salah : {answerStatus.incorrect}</h1>
+                    <h1>Sisa : {answerStatus.remaining}</h1>
+                    <h1>{answerStatus.completionPercentage}%</h1>
+                </div>
+            </div>
             <div className="w-full grid grid-cols-2 gap-20 pt-52">
                 <div className={`${selectedAnswer?.borderParent} relative border w-[450px] h-[450px] bg-white flex justify-center items-center justify-self-end`}>
                     {selectedAnswer && (
