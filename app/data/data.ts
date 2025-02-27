@@ -1,6 +1,10 @@
 import { KotobaKanji } from "../dto/kotoba-kanji";
 
-export const kotobaKanjiList: KotobaKanji[] = [
+export const getKotobaKanjiList = (): KotobaKanji[] => {
+    return kotobaKanjiList;
+};
+
+const kotobaKanjiList: KotobaKanji[] = [
     {
         id: 1,
         kanji: "家",
@@ -55,64 +59,64 @@ export const kotobaKanjiList: KotobaKanji[] = [
         hiragana: "みず",
         meaning: "air",
     },
-    {
-        id: 10,
-        kanji: "火",
-        hiragana: "ひ",
-        meaning: "api",
-    },
-    {
-        id: 11,
-        kanji: "本",
-        hiragana: "ほん",
-        meaning: "buku",
-    },
-    {
-        id: 12,
-        kanji: "本屋",
-        hiragana: "ほんや",
-        meaning: "toko buku",
-    },
-    {
-        id: 13,
-        kanji: "切符",
-        hiragana: "きっぷ",
-        meaning: "tiket",
-    },
-    {
-        id: 14,
-        kanji: "学生",
-        hiragana: "がくせい",
-        meaning: "murid",
-    },
-    {
-        id: 15,
-        kanji: "先生",
-        hiragana: "せんせい",
-        meaning: "guru",
-    },
-    {
-        id: 16,
-        kanji: "一日",
-        hiragana: "いちにち",
-        meaning: "satu hari",
-    },
-    {
-        id: 17,
-        kanji: "朝",
-        hiragana: "あさ",
-        meaning: "pagi",
-    },
-    {
-        id: 18,
-        kanji: "昼",
-        hiragana: "ひる",
-        meaning: "siang",
-    },
-    {
-        id: 19,
-        kanji: "夜",
-        hiragana: "よる",
-        meaning: "malam",
-    },
+    // {
+    //     id: 10,
+    //     kanji: "火",
+    //     hiragana: "ひ",
+    //     meaning: "api",
+    // },
+    // {
+    //     id: 11,
+    //     kanji: "本",
+    //     hiragana: "ほん",
+    //     meaning: "buku",
+    // },
+    // {
+    //     id: 12,
+    //     kanji: "本屋",
+    //     hiragana: "ほんや",
+    //     meaning: "toko buku",
+    // },
+    // {
+    //     id: 13,
+    //     kanji: "切符",
+    //     hiragana: "きっぷ",
+    //     meaning: "tiket",
+    // },
+    // {
+    //     id: 14,
+    //     kanji: "学生",
+    //     hiragana: "がくせい",
+    //     meaning: "murid",
+    // },
+    // {
+    //     id: 15,
+    //     kanji: "先生",
+    //     hiragana: "せんせい",
+    //     meaning: "guru",
+    // },
+    // {
+    //     id: 16,
+    //     kanji: "一日",
+    //     hiragana: "いちにち",
+    //     meaning: "satu hari",
+    // },
+    // {
+    //     id: 17,
+    //     kanji: "朝",
+    //     hiragana: "あさ",
+    //     meaning: "pagi",
+    // },
+    // {
+    //     id: 18,
+    //     kanji: "昼",
+    //     hiragana: "ひる",
+    //     meaning: "siang",
+    // },
+    // {
+    //     id: 19,
+    //     kanji: "夜",
+    //     hiragana: "よる",
+    //     meaning: "malam",
+    // },
 ];

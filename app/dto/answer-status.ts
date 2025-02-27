@@ -1,4 +1,4 @@
-import { kotobaKanjiList } from "../data/data";
+import { getKotobaKanjiList } from "../data/data";
 
 export interface AnswerStatus {
     correct: number;
@@ -11,7 +11,7 @@ export const startingAnswerStatus = (): AnswerStatus => {
     return {
         correct: 0,
         incorrect: 0,
-        remaining: kotobaKanjiList.length,
+        remaining: getKotobaKanjiList().length,
         completionPercentage: 0,
     };
 };

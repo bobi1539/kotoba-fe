@@ -3,25 +3,34 @@
 import { useCallback, useEffect, useState } from "react";
 import { getUniqueRandomNumbers, shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
-import { kotobaKanjiList } from "./data/data";
 import { SelectedAnswer } from "./dto/selected-answer";
 import { AnswerStatus, startingAnswerStatus } from "./dto/answer-status";
+import { getKotobaKanjiList } from "./data/data";
 
 export default function Home() {
-    const [question, setQuestion] = useState<KotobaKanji>();
+    const [kotobaKanjiList] = useState<KotobaKanji[]>(() => {
+        const data = [...getKotobaKanjiList()];
+        shuffleFisherYates(data);
+        return data;
+    });
+    const [question, setQuestion] = useState<KotobaKanji | null>(null);
     const [answers, setAnswers] = useState<KotobaKanji[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>();
     const [isButtonAnswerDisabled, setIsButtonAnswerDisabled] = useState<boolean>(false);
     const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
     const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus());
+    const [nextQuestion, setNextQuestion] = useState<number>(0);
 
     const randomizeQuestion = useCallback((): void => {
-        // Take one question at random
-        const randomQuestionIndex: number = Math.floor(Math.random() * kotobaKanjiList.length);
-        const randomQuestion: KotobaKanji = kotobaKanjiList[randomQuestionIndex];
+        console.log(nextQuestion);
+        if (nextQuestion >= kotobaKanjiList.length) {
+            return;
+        }
+
+        const randomQuestion: KotobaKanji = kotobaKanjiList[nextQuestion];
 
         // Take 8 unique numbers (since 1 is already taken as a question)
-        const randomNumbers = getUniqueRandomNumbers(0, kotobaKanjiList.length - 1, 8, randomQuestionIndex);
+        const randomNumbers = getUniqueRandomNumbers(0, kotobaKanjiList.length - 1, 8, nextQuestion);
 
         // Add `randomQuestion` to answers
         const randomAnswers: KotobaKanji[] = [randomQuestion, ...randomNumbers.map((num) => kotobaKanjiList[num])];
@@ -31,7 +40,7 @@ export default function Home() {
 
         setQuestion(randomQuestion);
         setAnswers(randomAnswers);
-    }, []);
+    }, [kotobaKanjiList, nextQuestion]);
 
     useEffect((): void => {
         randomizeQuestion();
@@ -87,7 +96,7 @@ export default function Home() {
     };
 
     const handleClickNext = (): void => {
-        randomizeQuestion();
+        setNextQuestion((prev) => prev + 1);
         setIsButtonAnswerDisabled(!isButtonAnswerDisabled);
         setIsButtonNextDisabled(!isButtonNextDisabled);
         setSelectedAnswer(undefined);
