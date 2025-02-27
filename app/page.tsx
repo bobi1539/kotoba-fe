@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
 import { kotobaKanjiList } from "./data/data";
@@ -9,11 +9,11 @@ import { SelectedAnswer } from "./dto/selected-answer";
 export default function Home() {
     const [question, setQuestion] = useState<KotobaKanji>();
     const [answers, setAnswers] = useState<KotobaKanji[]>([]);
-    const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer>();
+    const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>();
     const [isButtonAnswerDisabled, setIsButtonAnswerDisabled] = useState<boolean>(false);
     const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
 
-    useEffect(() => {
+    const randomizeQuestion = useCallback((): void => {
         const range = kotobaKanjiList.length - 1;
 
         // Take one question at random
@@ -35,6 +35,10 @@ export default function Home() {
         setQuestion(randomQuestion);
         setAnswers(randomAnswers);
     }, []);
+
+    useEffect((): void => {
+        randomizeQuestion();
+    }, [randomizeQuestion]);
 
     const getUniqueRandomNumbers = (min: number, max: number, count: number, excludeIndex?: number): number[] => {
         const numbers = Array.from({ length: max - min + 1 }, (_, i) => i + min);
@@ -75,6 +79,13 @@ export default function Home() {
         setIsButtonNextDisabled(!isButtonNextDisabled);
     };
 
+    const handleClickNext = (): void => {
+        randomizeQuestion();
+        setIsButtonAnswerDisabled(!isButtonAnswerDisabled);
+        setIsButtonNextDisabled(!isButtonNextDisabled);
+        setSelectedAnswer(undefined);
+    };
+
     return (
         <section className="bg-gray-100 h-screen">
             <div className="w-full grid grid-cols-2 gap-20 pt-52">
@@ -109,7 +120,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="flex justify-center my-10">
-                <button disabled={isButtonNextDisabled} className={`${isButtonNextDisabled ? "bg-gray-500" : "bg-green-500 hover:bg-green-600 cursor-pointer"} px-10 py-2 text-white rounded`}>
+                <button onClick={handleClickNext} disabled={isButtonNextDisabled} className={`${isButtonNextDisabled ? "bg-gray-500" : "bg-gray-500 hover:bg-gray-600 cursor-pointer"} px-10 py-2 text-white rounded`}>
                     Next
                 </button>
             </div>
