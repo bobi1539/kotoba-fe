@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getUniqueRandomNumbers, shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
 import { SelectedAnswer } from "./dto/selected-answer";
@@ -108,12 +108,26 @@ export default function Home() {
         return Math.floor((correct / total) * 100);
     };
 
-    const handleClickNext = (): void => {
+    const handleClickNext = useCallback((): void => {
         setNextQuestion((prev) => prev + 1);
         setIsButtonAnswerDisabled(!isButtonAnswerDisabled);
         setIsButtonNextDisabled(!isButtonNextDisabled);
         setSelectedAnswer(undefined);
-    };
+    }, [isButtonAnswerDisabled, isButtonNextDisabled]);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.code === "Space" && isButtonAnswerDisabled) {
+                handleClickNext();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [handleClickNext, isButtonAnswerDisabled]);
 
     return (
         <section className="bg-gray-100 h-screen">
