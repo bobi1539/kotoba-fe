@@ -144,7 +144,7 @@ const kotobaKanjiList: KotobaKanji[] = [
         meaning: "rabu",
     },
     {
-        id: 25,
+        id: 24,
         kanji: "木曜日",
         hiragana: "もくようび",
         meaning: "kamis",
