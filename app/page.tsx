@@ -6,6 +6,7 @@ import { KotobaKanji } from "./dto/kotoba-kanji";
 import { SelectedAnswer } from "./dto/selected-answer";
 import { AnswerStatus, startingAnswerStatus } from "./dto/answer-status";
 import { getKotobaKanjiList } from "./data/data";
+import Swal from "sweetalert2";
 
 export default function Home() {
     const [kotobaKanjiList] = useState<KotobaKanji[]>(() => {
@@ -23,7 +24,20 @@ export default function Home() {
 
     useEffect((): void => {
         if (nextQuestion >= kotobaKanjiList.length) {
-            alert("Selesai.");
+            Swal.fire({
+                title: "Selesai",
+                text: `Benar ${answerStatus.correct} dari ${kotobaKanjiList.length}`,
+                icon: "success",
+                confirmButtonColor: "#15803d",
+                customClass: {
+                    popup: "custom-swal",
+                },
+            });
+        }
+    }, [kotobaKanjiList, nextQuestion, answerStatus]);
+
+    useEffect((): void => {
+        if (nextQuestion >= kotobaKanjiList.length) {
             setNextQuestion(0);
             setAnswerStatus(startingAnswerStatus());
             shuffleFisherYates(kotobaKanjiList);
