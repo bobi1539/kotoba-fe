@@ -4,18 +4,14 @@ import { useEffect, useState } from "react";
 import { shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
 import { kotobaKanjiList } from "./data/data";
-
-interface SelectedAnswer {
-    isCorrect: boolean;
-    borderParent: string;
-    borderChild: string;
-    icon: string;
-}
+import { SelectedAnswer } from "./dto/selected-answer";
 
 export default function Home() {
     const [question, setQuestion] = useState<KotobaKanji>();
     const [answers, setAnswers] = useState<KotobaKanji[]>([]);
-    const [selectedAnswer, setSelectedAnswer] = useState<KotobaKanji>();
+    const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer>();
+    const [isButtonAnswerDisabled, setIsButtonAnswerDisabled] = useState<boolean>(false);
+    const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
 
     useEffect(() => {
         const range = kotobaKanjiList.length - 1;
@@ -55,60 +51,67 @@ export default function Home() {
         return numbers.slice(0, count);
     };
 
-    const getQuestionClassName = (): string => {
-        if (selectedAnswer) {
-            return selectedAnswer.id === question?.id ? "border-green-500" : "border-red-700";
-        }
-        return "";
-    };
-
     const handleClickAnswer = (answer: KotobaKanji): void => {
-		setSelectedAnswer(answer);
-		// if (answer.id === question?.id) {
-		// 	setSelectedAnswer({
-		// 		isCorrect: true,
-		// 		borderParent: "border-green-500",
-		// 		borderChild: "border-red-500"
-		// 	})
-		// }
+        if (answer.id === question?.id) {
+            setSelectedAnswer({
+                isCorrect: true,
+                borderParent: "border-green-500",
+                borderChild: "border-4 border-green-500",
+                bgColor: "bg-green-500",
+                icon: "fa-solid fa-check",
+                answer: answer,
+            });
+        } else {
+            setSelectedAnswer({
+                isCorrect: false,
+                borderParent: "border-red-700",
+                borderChild: "border-4 border-red-700",
+                bgColor: "bg-red-700",
+                icon: "fa-solid fa-xmark",
+                answer: answer,
+            });
+        }
+        setIsButtonAnswerDisabled(!isButtonAnswerDisabled);
+        setIsButtonNextDisabled(!isButtonNextDisabled);
     };
 
     return (
-        <section className="bg-gray-100 w-full h-screen grid grid-cols-2 gap-20 pt-52">
-            <div className={`${getQuestionClassName()} relative border w-[450px] h-[450px] bg-white flex justify-center items-center justify-self-end`}>
-                {selectedAnswer && (
-                    <>
-                        <div className={`${getQuestionClassName()} absolute w-full h-full border-6`} />
-                        <div className="absolute left-0 top-0 bg-red-700 w-9 h-9 flex justify-center items-center">
-                            <i className="fa-solid fa-xmark text-2xl text-white" />
-                        </div>
-                    </>
-                )}
-                <p className="text-[100px]">{question?.kanji}</p>
-            </div>
-            <div className="w-[450px] h-[450px] grid grid-cols-3 gap-3">
-                {answers.map((answer) => {
-                    let classAnswerParent = "border-gray-800";
-                    let classAnswerChilds = "border-gray-800";
-                    if (answer.id === selectedAnswer?.id) {
-                        if (answer.id === question?.id) {
-                            classAnswerParent = "border-green-500";
-                            classAnswerChilds = "border-4 border-green-500";
-                        } else {
-                            classAnswerParent = "border-red-700";
-                            classAnswerChilds = "border-4 border-red-700";
-                        }
-                    }
-                    return (
-                        <div key={answer.id} onClick={() => handleClickAnswer(answer)} className={`${classAnswerParent} relative border bg-white flex justify-center items-center p-3 hover:cursor-pointer`}>
-                            <div className={`${classAnswerChilds} absolute w-full h-full`} />
+        <section className="bg-gray-100 h-screen">
+            <div className="w-full grid grid-cols-2 gap-20 pt-52">
+                <div className={`${selectedAnswer?.borderParent} relative border w-[450px] h-[450px] bg-white flex justify-center items-center justify-self-end`}>
+                    {selectedAnswer && (
+                        <>
+                            <div className={`${selectedAnswer.borderChild} absolute w-full h-full border-6`} />
+                            <div className={`${selectedAnswer.bgColor} absolute left-0 top-0 w-9 h-9 flex justify-center items-center`}>
+                                <i className={`${selectedAnswer.icon} text-2xl text-white`} />
+                            </div>
+                        </>
+                    )}
+                    <p className="text-[100px]">{question?.kanji}</p>
+                </div>
+                <div className="w-[450px] h-[450px] grid grid-cols-3 gap-3">
+                    {answers.map((answer) => (
+                        <button key={answer.id} disabled={isButtonAnswerDisabled} onClick={() => handleClickAnswer(answer)} className={`${answer.id === selectedAnswer?.answer.id && selectedAnswer?.borderParent} relative border bg-white flex justify-center items-center p-3 hover:cursor-pointer`}>
+                            {selectedAnswer && (
+                                <>
+                                    <div className={`${answer.id === selectedAnswer.answer.id && selectedAnswer.borderChild} absolute w-full h-full`} />
+                                    <div className={`${answer.id === selectedAnswer.answer.id && selectedAnswer.bgColor} absolute left-0 top-0 w-6 h-6 flex justify-center items-center`}>
+                                        <i className={`${answer.id === selectedAnswer.answer.id && selectedAnswer.icon} text-white`} />
+                                    </div>
+                                </>
+                            )}
                             <div>
                                 <p className="text-center font-light text-gray-900 capitalize">{answer.meaning}</p>
                                 <p className="text-center font-light text-gray-700 text-sm">{answer.hiragana}</p>
                             </div>
-                        </div>
-                    );
-                })}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <div className="flex justify-center my-10">
+                <button disabled={isButtonNextDisabled} className={`${isButtonNextDisabled ? "bg-gray-500" : "bg-green-500 hover:bg-green-600 cursor-pointer"} px-10 py-2 text-white rounded`}>
+                    Next
+                </button>
             </div>
         </section>
     );
