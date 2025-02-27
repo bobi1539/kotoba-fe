@@ -70,7 +70,7 @@ export const kotobaKanjiList: KotobaKanji[] = [
     {
         id: 12,
         kanji: "本屋",
-        hiragana: "ほにや",
+        hiragana: "ほんや",
         meaning: "toko buku",
     },
     {

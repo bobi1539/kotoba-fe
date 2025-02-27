@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { shuffleFisherYates } from "./util/helper";
+import { getUniqueRandomNumbers, shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
 import { kotobaKanjiList } from "./data/data";
 import { SelectedAnswer } from "./dto/selected-answer";
@@ -29,10 +29,7 @@ export default function Home() {
         const randomAnswers: KotobaKanji[] = [randomQuestion, ...randomNumbers.map((num) => kotobaKanjiList[num])];
 
         // Shuffle again so that `randomQuestion` is not always at index 0
-        for (let i = randomAnswers.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [randomAnswers[i], randomAnswers[j]] = [randomAnswers[j], randomAnswers[i]];
-        }
+        shuffleFisherYates(randomAnswers);
 
         setQuestion(randomQuestion);
         setAnswers(randomAnswers);
@@ -41,21 +38,6 @@ export default function Home() {
     useEffect((): void => {
         randomizeQuestion();
     }, [randomizeQuestion]);
-
-    const getUniqueRandomNumbers = (min: number, max: number, count: number, excludeIndex?: number): number[] => {
-        const numbers = Array.from({ length: max - min + 1 }, (_, i) => i + min);
-
-        // Remove the number selected as the question from the list of numbers that can be taken
-        if (excludeIndex) {
-            numbers.splice(excludeIndex, 1);
-        }
-
-        // Shuffle using Fisher-Yates
-        shuffleFisherYates(numbers);
-
-        // Get a `count` number of unique numbers
-        return numbers.slice(0, count);
-    };
 
     const handleClickAnswer = (answer: KotobaKanji): void => {
         if (answer.id === question?.id) {
@@ -96,7 +78,7 @@ export default function Home() {
         setAnswerStatus((prevState) => ({
             correct: prevState.correct,
             incorrect: prevState.incorrect + 1,
-            remaining: prevState.remaining - 1,
+            remaining: prevState.remaining,
             completionPercentage: prevState.completionPercentage,
         }));
     };
