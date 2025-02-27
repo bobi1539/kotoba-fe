@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getUniqueRandomNumbers, shuffleFisherYates } from "./util/helper";
 import { KotobaKanji } from "./dto/kotoba-kanji";
 import { SelectedAnswer } from "./dto/selected-answer";
@@ -21,9 +21,12 @@ export default function Home() {
     const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus());
     const [nextQuestion, setNextQuestion] = useState<number>(0);
 
-    const randomizeQuestion = useCallback((): void => {
-        console.log(nextQuestion);
+    useEffect((): void => {
         if (nextQuestion >= kotobaKanjiList.length) {
+            alert("Selesai.");
+            setNextQuestion(0);
+            setAnswerStatus(startingAnswerStatus())
+            shuffleFisherYates(kotobaKanjiList);
             return;
         }
 
@@ -41,10 +44,6 @@ export default function Home() {
         setQuestion(randomQuestion);
         setAnswers(randomAnswers);
     }, [kotobaKanjiList, nextQuestion]);
-
-    useEffect((): void => {
-        randomizeQuestion();
-    }, [randomizeQuestion]);
 
     const handleClickAnswer = (answer: KotobaKanji): void => {
         if (answer.id === question?.id) {
@@ -69,7 +68,7 @@ export default function Home() {
             correct: prevState.correct + 1,
             incorrect: prevState.incorrect,
             remaining: prevState.remaining - 1,
-            completionPercentage: calculateCompletionPercentage(prevState.correct + 1, prevState.incorrect),
+            correctPercentage: calculateCorrectPercentage(prevState.correct + 1, prevState.incorrect),
         }));
     };
 
@@ -85,12 +84,12 @@ export default function Home() {
         setAnswerStatus((prevState) => ({
             correct: prevState.correct,
             incorrect: prevState.incorrect + 1,
-            remaining: prevState.remaining,
-            completionPercentage: calculateCompletionPercentage(prevState.correct, prevState.incorrect + 1),
+            remaining: prevState.remaining - 1,
+            correctPercentage: calculateCorrectPercentage(prevState.correct, prevState.incorrect + 1),
         }));
     };
 
-    const calculateCompletionPercentage = (correct: number, incorrect: number): number => {
+    const calculateCorrectPercentage = (correct: number, incorrect: number): number => {
         const total = correct + incorrect;
         return Math.floor((correct / total) * 100);
     };
@@ -110,7 +109,7 @@ export default function Home() {
                     <h1>Benar : {answerStatus.correct}</h1>
                     <h1>Salah : {answerStatus.incorrect}</h1>
                     <h1>Sisa : {answerStatus.remaining}</h1>
-                    <h1>{answerStatus.completionPercentage}%</h1>
+                    <h1>{answerStatus.correctPercentage}%</h1>
                 </div>
             </div>
             <div className="w-full grid grid-cols-2 gap-20 pt-52">

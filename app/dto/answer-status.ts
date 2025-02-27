@@ -4,7 +4,7 @@ export interface AnswerStatus {
     correct: number;
     incorrect: number;
     remaining: number;
-    completionPercentage: number;
+    correctPercentage: number;
 }
 
 export const startingAnswerStatus = (): AnswerStatus => {
@@ -12,6 +12,6 @@ export const startingAnswerStatus = (): AnswerStatus => {
         correct: 0,
         incorrect: 0,
         remaining: getKotobaKanjiList().length,
-        completionPercentage: 0,
+        correctPercentage: 0,
     };
 };
