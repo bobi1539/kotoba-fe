@@ -276,19 +276,19 @@ const kotobaListPart01: Kotoba[] = [
         meaning: "permisi, nama anda?",
     },
     {
-        id: 45,
+        id: 46,
         kanji: "おしえてください",
         hiragana: "おしえてください",
         meaning: "tolong ajarkan",
     },
     {
-        id: 46,
+        id: 47,
         kanji: "いくらですか",
         hiragana: "いくらですか",
         meaning: "berapa harganya?",
     },
     {
-        id: 47,
+        id: 48,
         kanji: "おめでとうございます",
         hiragana: "おめでとうございます",
         meaning: "selamat (sopan)",
