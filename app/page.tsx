@@ -164,8 +164,8 @@ export default function Home() {
                                 </>
                             )}
                             <div className="w-[108px] h-[108px] lg:w-[140px] lg:h-[140px] p-2 flex flex-col justify-center items-center">
-                                <p className="text-center font-light text-gray-900 capitalize text-sm lg:text-base leading-4">{answer.meaning}</p>
-                                <p className="text-center font-light text-gray-700 text-xs lg:text-sm">{answer.hiragana}</p>
+                                <p className="text-center font-light text-gray-900 capitalize text-xs lg:text-sm leading-4">{answer.meaning}</p>
+                                <p className="text-center font-light text-gray-700 text-[10px] lg:text-xs mt-1">{answer.hiragana}</p>
                             </div>
                         </button>
                     ))}
