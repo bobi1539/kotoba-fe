@@ -140,7 +140,7 @@ export default function Home() {
                     <h1>{answerStatus.correctPercentage}%</h1>
                 </div>
             </div>
-            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 pt-10 lg:pt-52">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 pt-5 lg:pt-24">
                 <div className={`${selectedAnswer?.borderParent} relative border w-[350px] h-[180px] lg:w-[450px] lg:h-[450px] bg-white flex justify-center items-center justify-self-center lg:justify-self-end`}>
                     {selectedAnswer && (
                         <>
@@ -152,9 +152,9 @@ export default function Home() {
                     )}
                     <p className="text-[50px] lg:text-[100px]">{question?.kanji}</p>
                 </div>
-                <div className="w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] grid grid-cols-3 gap-3 justify-self-center lg:justify-self-start">
+                <div className="w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] grid grid-cols-3 gap-2 lg:gap-3 justify-self-center lg:justify-self-start">
                     {answers.map((answer) => (
-                        <button key={answer.id} disabled={isButtonAnswerDisabled} onClick={() => handleClickAnswer(answer)} className={`${answer.id === selectedAnswer?.answer.id && selectedAnswer?.borderParent} relative border bg-white flex justify-center items-center p-3 hover:cursor-pointer`}>
+                        <button key={answer.id} disabled={isButtonAnswerDisabled} onClick={() => handleClickAnswer(answer)} className={`${answer.id === selectedAnswer?.answer.id && selectedAnswer?.borderParent} relative border bg-white flex justify-center items-center hover:cursor-pointer`}>
                             {selectedAnswer && (
                                 <>
                                     <div className={`${answer.id === selectedAnswer.answer.id && selectedAnswer.borderChild} absolute w-full h-full`} />
@@ -163,8 +163,8 @@ export default function Home() {
                                     </div>
                                 </>
                             )}
-                            <div>
-                                <p className="text-center font-light text-gray-900 capitalize text-sm lg:text-base">{answer.meaning}</p>
+                            <div className="w-[108px] h-[108px] lg:w-[140px] lg:h-[140px] p-2 flex flex-col justify-center items-center">
+                                <p className="text-center font-light text-gray-900 capitalize text-sm lg:text-base leading-4">{answer.meaning}</p>
                                 <p className="text-center font-light text-gray-700 text-xs lg:text-sm">{answer.hiragana}</p>
                             </div>
                         </button>
