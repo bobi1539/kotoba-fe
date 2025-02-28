@@ -19,7 +19,7 @@ export default function Home() {
     const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>();
     const [isButtonAnswerDisabled, setIsButtonAnswerDisabled] = useState<boolean>(false);
     const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
-    const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus());
+    const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus(kotobaList.length));
     const [nextQuestion, setNextQuestion] = useState<number>(0);
 
     useEffect((): void => {
@@ -39,7 +39,7 @@ export default function Home() {
     useEffect((): void => {
         if (nextQuestion >= kotobaList.length) {
             setNextQuestion(0);
-            setAnswerStatus(startingAnswerStatus());
+            setAnswerStatus(startingAnswerStatus(kotobaList.length));
             shuffleFisherYates(kotobaList);
             return;
         }

@@ -1,5 +1,3 @@
-import { getKotobaList } from "../data/data";
-
 export interface AnswerStatus {
     correct: number;
     incorrect: number;
@@ -7,11 +5,11 @@ export interface AnswerStatus {
     correctPercentage: number;
 }
 
-export const startingAnswerStatus = (): AnswerStatus => {
+export const startingAnswerStatus = (remaining: number): AnswerStatus => {
     return {
         correct: 0,
         incorrect: 0,
-        remaining: getKotobaList().length,
+        remaining: remaining,
         correctPercentage: 0,
     };
 };
