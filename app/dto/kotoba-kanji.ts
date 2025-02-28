@@ -1,4 +1,4 @@
-export interface KotobaKanji {
+export interface Kotoba {
     id: number;
     kanji: string;
     hiragana: string;

@@ -2,20 +2,20 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { getUniqueRandomNumbers, shuffleFisherYates } from "./util/helper";
-import { KotobaKanji } from "./dto/kotoba-kanji";
+import { Kotoba } from "./dto/kotoba-kanji";
 import { SelectedAnswer } from "./dto/selected-answer";
 import { AnswerStatus, startingAnswerStatus } from "./dto/answer-status";
-import { getKotobaKanjiList } from "./data/data";
 import Swal from "sweetalert2";
+import { getKotobaListPart01 } from "./data/n5/part-01";
 
 export default function Home() {
-    const [kotobaKanjiList] = useState<KotobaKanji[]>(() => {
-        const data = [...getKotobaKanjiList()];
+    const [kotobaList] = useState<Kotoba[]>(() => {
+        const data = [...getKotobaListPart01()];
         shuffleFisherYates(data);
         return data;
     });
-    const [question, setQuestion] = useState<KotobaKanji | null>(null);
-    const [answers, setAnswers] = useState<KotobaKanji[]>([]);
+    const [question, setQuestion] = useState<Kotoba | null>(null);
+    const [answers, setAnswers] = useState<Kotoba[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>();
     const [isButtonAnswerDisabled, setIsButtonAnswerDisabled] = useState<boolean>(false);
     const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
@@ -23,10 +23,10 @@ export default function Home() {
     const [nextQuestion, setNextQuestion] = useState<number>(0);
 
     useEffect((): void => {
-        if (nextQuestion >= kotobaKanjiList.length) {
+        if (nextQuestion >= kotobaList.length) {
             Swal.fire({
                 title: "Selesai",
-                text: `Benar ${answerStatus.correct} dari ${kotobaKanjiList.length}`,
+                text: `Benar ${answerStatus.correct} dari ${kotobaList.length}`,
                 icon: "success",
                 confirmButtonColor: "#15803d",
                 customClass: {
@@ -34,32 +34,32 @@ export default function Home() {
                 },
             });
         }
-    }, [kotobaKanjiList, nextQuestion, answerStatus]);
+    }, [kotobaList, nextQuestion, answerStatus]);
 
     useEffect((): void => {
-        if (nextQuestion >= kotobaKanjiList.length) {
+        if (nextQuestion >= kotobaList.length) {
             setNextQuestion(0);
             setAnswerStatus(startingAnswerStatus());
-            shuffleFisherYates(kotobaKanjiList);
+            shuffleFisherYates(kotobaList);
             return;
         }
 
-        const randomQuestion: KotobaKanji = kotobaKanjiList[nextQuestion];
+        const randomQuestion: Kotoba = kotobaList[nextQuestion];
 
         // Take 8 unique numbers (since 1 is already taken as a question)
-        const randomNumbers = getUniqueRandomNumbers(0, kotobaKanjiList.length - 1, 8, nextQuestion);
+        const randomNumbers = getUniqueRandomNumbers(0, kotobaList.length - 1, 8, nextQuestion);
 
         // Add `randomQuestion` to answers
-        const randomAnswers: KotobaKanji[] = [randomQuestion, ...randomNumbers.map((num) => kotobaKanjiList[num])];
+        const randomAnswers: Kotoba[] = [randomQuestion, ...randomNumbers.map((num) => kotobaList[num])];
 
         // Shuffle again so that `randomQuestion` is not always at index 0
         shuffleFisherYates(randomAnswers);
 
         setQuestion(randomQuestion);
         setAnswers(randomAnswers);
-    }, [kotobaKanjiList, nextQuestion]);
+    }, [kotobaList, nextQuestion]);
 
-    const handleClickAnswer = (answer: KotobaKanji): void => {
+    const handleClickAnswer = (answer: Kotoba): void => {
         if (answer.id === question?.id) {
             setCorrectAnswer(answer);
         } else {
@@ -69,7 +69,7 @@ export default function Home() {
         setIsButtonNextDisabled(!isButtonNextDisabled);
     };
 
-    const setCorrectAnswer = (answer: KotobaKanji): void => {
+    const setCorrectAnswer = (answer: Kotoba): void => {
         setSelectedAnswer({
             isCorrect: true,
             borderParent: "border-green-500",
@@ -86,7 +86,7 @@ export default function Home() {
         }));
     };
 
-    const setIncorrectAnswer = (answer: KotobaKanji): void => {
+    const setIncorrectAnswer = (answer: Kotoba): void => {
         setSelectedAnswer({
             isCorrect: false,
             borderParent: "border-red-700",
@@ -150,7 +150,7 @@ export default function Home() {
                             </div>
                         </>
                     )}
-                    <p className="text-[50px] lg:text-[100px]">{question?.kanji}</p>
+                    <p className="text-[30px] lg:text-[50px] text-center">{question?.kanji}</p>
                 </div>
                 <div className="w-[350px] h-[350px] lg:w-[450px] lg:h-[450px] grid grid-cols-3 gap-2 lg:gap-3 justify-self-center lg:justify-self-start">
                     {answers.map((answer) => (

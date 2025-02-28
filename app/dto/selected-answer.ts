@@ -1,4 +1,4 @@
-import { KotobaKanji } from "./kotoba-kanji";
+import { Kotoba } from "./kotoba-kanji";
 
 export interface SelectedAnswer {
     isCorrect: boolean;
@@ -6,5 +6,5 @@ export interface SelectedAnswer {
     borderChild: string;
     bgColor: string;
     icon: string;
-    answer: KotobaKanji;
+    answer: Kotoba;
 }
