@@ -7,6 +7,7 @@ import { SelectedAnswer } from "./dto/selected-answer";
 import { AnswerStatus, startingAnswerStatus } from "./dto/answer-status";
 import Swal from "sweetalert2";
 import { getKotobaListPart01 } from "./data/n5/part-01";
+import SelectLevel from "./select-level";
 
 export default function Home() {
     const [kotobaList] = useState<Kotoba[]>(() => {
@@ -21,6 +22,7 @@ export default function Home() {
     const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
     const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus(kotobaList.length));
     const [nextQuestion, setNextQuestion] = useState<number>(0);
+    const [isModalSelectLevelOpen, setIsModalSelectLevelOpen] = useState<boolean>(false);
 
     useEffect((): void => {
         if (nextQuestion >= kotobaList.length) {
@@ -133,11 +135,18 @@ export default function Home() {
         <section className="bg-gray-100 h-screen">
             <div className="flex justify-between bg-gray-200 border-gray-500 font-light">
                 <div></div>
-                <div className="bg-gray-300 p-2 flex justify-between gap-4 px-10">
-                    <h1>Benar : {answerStatus.correct}</h1>
-                    <h1>Salah : {answerStatus.incorrect}</h1>
-                    <h1>Sisa : {answerStatus.remaining}</h1>
-                    <h1>{answerStatus.correctPercentage}%</h1>
+                <div className="flex gap-4">
+                    <div className="py-2">
+                        <button onClick={() => setIsModalSelectLevelOpen(!isModalSelectLevelOpen)} className="bg-gray-500 hover:bg-gray-400 cursor-pointer px-5 py-1 text-white rounded">
+                            Pilih Level
+                        </button>
+                    </div>
+                    <div className="bg-gray-300 flex justify-between items-center gap-4 px-10">
+                        <h1>Benar : {answerStatus.correct}</h1>
+                        <h1>Salah : {answerStatus.incorrect}</h1>
+                        <h1>Sisa : {answerStatus.remaining}</h1>
+                        <h1>{answerStatus.correctPercentage}%</h1>
+                    </div>
                 </div>
             </div>
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 pt-5 lg:pt-24">
@@ -172,10 +181,11 @@ export default function Home() {
                 </div>
             </div>
             <div className="flex justify-center my-5 lg:my-10">
-                <button onClick={handleClickNext} disabled={isButtonNextDisabled} className={`${isButtonNextDisabled ? "bg-gray-500" : "bg-gray-500 hover:bg-gray-600 cursor-pointer"} px-10 py-2 text-white rounded`}>
+                <button onClick={handleClickNext} disabled={isButtonNextDisabled} className={`${isButtonNextDisabled ? "bg-gray-500" : "bg-gray-500 hover:bg-gray-400 cursor-pointer"} px-10 py-2 text-white rounded`}>
                     Next
                 </button>
             </div>
+            {isModalSelectLevelOpen && <SelectLevel closeModal={() => setIsModalSelectLevelOpen(false)} />}
         </section>
     );
 }
