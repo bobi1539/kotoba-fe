@@ -5,11 +5,11 @@ export interface AnswerStatus {
     correctPercentage: number;
 }
 
-export const startingAnswerStatus = (remaining: number): AnswerStatus => {
+export const startingAnswerStatus = (): AnswerStatus => {
     return {
         correct: 0,
         incorrect: 0,
-        remaining: remaining,
+        remaining: 0,
         correctPercentage: 0,
     };
 };

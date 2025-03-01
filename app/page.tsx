@@ -1,34 +1,47 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { getUniqueRandomNumbers, shuffleFisherYates } from "./util/helper";
+import { getSelectLevelMap, getUniqueRandomNumbers, shuffleFisherYates } from "./util/helper";
 import { Kotoba } from "./dto/kotoba-kanji";
 import { SelectedAnswer } from "./dto/selected-answer";
 import { AnswerStatus, startingAnswerStatus } from "./dto/answer-status";
-import Swal from "sweetalert2";
 import SelectLevel from "./select-level";
-import { getKotobaListN5Part01 } from "./data/n5/part-01";
+import { N5_01 } from "./constant/general";
+import Swal from "sweetalert2";
 
 export default function Home() {
-    const [kotobaList] = useState<Kotoba[]>(() => {
-        const data = [...getKotobaListN5Part01()];
-        shuffleFisherYates(data);
-        return data;
-    });
+    const [currentLevel, setCurrentLevel] = useState<string>(N5_01);
+    const [kotobaList, setKotobaList] = useState<Kotoba[]>([]);
     const [question, setQuestion] = useState<Kotoba | null>(null);
     const [answers, setAnswers] = useState<Kotoba[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>();
     const [isButtonAnswerDisabled, setIsButtonAnswerDisabled] = useState<boolean>(false);
     const [isButtonNextDisabled, setIsButtonNextDisabled] = useState<boolean>(true);
-    const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus(kotobaList.length));
+    const [answerStatus, setAnswerStatus] = useState<AnswerStatus>(startingAnswerStatus());
     const [nextQuestion, setNextQuestion] = useState<number>(0);
     const [isModalSelectLevelOpen, setIsModalSelectLevelOpen] = useState<boolean>(false);
 
     useEffect((): void => {
-        if (nextQuestion >= kotobaList.length) {
+        const dataKotobaList = getSelectLevelMap().get(currentLevel) ?? [];
+        shuffleFisherYates(dataKotobaList);
+        setKotobaList(dataKotobaList);
+    }, [currentLevel]);
+
+    useEffect((): void => {
+        setAnswerStatus((prevState) => ({
+            correct: prevState.correct,
+            incorrect: prevState.incorrect,
+            remaining: kotobaList.length,
+            correctPercentage: prevState.correctPercentage,
+        }));
+    }, [kotobaList.length]);
+
+    useEffect((): void => {
+        const totalQuestion = answerStatus.correct + answerStatus.incorrect + answerStatus.remaining;
+        if (totalQuestion !== 0 && nextQuestion >= totalQuestion) {
             Swal.fire({
                 title: "Selesai",
-                text: `Benar ${answerStatus.correct} dari ${kotobaList.length}`,
+                text: `Benar ${answerStatus.correct} dari ${totalQuestion}`,
                 icon: "success",
                 confirmButtonColor: "#15803d",
                 customClass: {
@@ -36,12 +49,17 @@ export default function Home() {
                 },
             });
         }
-    }, [kotobaList, nextQuestion, answerStatus]);
+    });
 
     useEffect((): void => {
         if (nextQuestion >= kotobaList.length) {
             setNextQuestion(0);
-            setAnswerStatus(startingAnswerStatus(kotobaList.length));
+            setAnswerStatus({
+                correct: 0,
+                incorrect: 0,
+                remaining: kotobaList.length,
+                correctPercentage: 0,
+            });
             shuffleFisherYates(kotobaList);
             return;
         }
