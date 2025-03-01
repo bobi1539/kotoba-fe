@@ -25,6 +25,12 @@ export default function Home() {
         const dataKotobaList = getSelectLevelMap().get(currentLevel) ?? [];
         shuffleFisherYates(dataKotobaList);
         setKotobaList(dataKotobaList);
+
+        setNextQuestion(0);
+        setIsButtonAnswerDisabled(false);
+        setIsButtonNextDisabled(true);
+        setSelectedAnswer(undefined);
+        setAnswerStatus(startingAnswerStatus());
     }, [currentLevel]);
 
     useEffect((): void => {
@@ -203,7 +209,7 @@ export default function Home() {
                     Next
                 </button>
             </div>
-            {isModalSelectLevelOpen && <SelectLevel closeModal={() => setIsModalSelectLevelOpen(false)} />}
+            {isModalSelectLevelOpen && <SelectLevel setCurrentLevel={setCurrentLevel} closeModal={() => setIsModalSelectLevelOpen(false)} />}
         </section>
     );
 }
