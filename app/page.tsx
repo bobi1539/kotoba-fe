@@ -133,15 +133,15 @@ export default function Home() {
 
     return (
         <section className="bg-gray-100 h-screen">
-            <div className="flex justify-between bg-gray-200 border-gray-500 font-light">
+            <div className="lg:flex lg:justify-between bg-gray-200 border-gray-500 font-light">
                 <div></div>
-                <div className="flex gap-4">
-                    <div className="py-2">
+                <div className="flex flex-col lg:flex-row gap-1 lg:gap-4">
+                    <div className="lg:py-2 flex justify-end pt-1 pr-1">
                         <button onClick={() => setIsModalSelectLevelOpen(!isModalSelectLevelOpen)} className="bg-gray-500 hover:bg-gray-400 cursor-pointer px-5 py-1 text-white rounded">
                             Pilih Level
                         </button>
                     </div>
-                    <div className="bg-gray-300 flex justify-between items-center gap-4 px-10">
+                    <div className="bg-gray-300 flex justify-between items-center gap-4 px-10 py-2 lg:py-0">
                         <h1>Benar : {answerStatus.correct}</h1>
                         <h1>Salah : {answerStatus.incorrect}</h1>
                         <h1>Sisa : {answerStatus.remaining}</h1>
