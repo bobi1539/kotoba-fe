@@ -1,3 +1,8 @@
+import { N5_01, N5_02 } from "../constant/general";
+import { getKotobaListN5Part01 } from "../data/n5/part-01";
+import { getKotobaListN5Part02 } from "../data/n5/part-02";
+import { Kotoba } from "../dto/kotoba-kanji";
+
 export const getUniqueRandomNumbers = (min: number, max: number, count: number, excludeIndex: number): number[] => {
     const numbers = Array.from({ length: max - min + 1 }, (_, i) => i + min);
 
@@ -16,4 +21,11 @@ export const shuffleFisherYates = <T>(array: T[]): void => {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]]; // Swap elemen
     }
+};
+
+export const getSelectLevelMap = (): Map<string, Kotoba[]> => {
+    return new Map([
+        [N5_01, getKotobaListN5Part01()],
+        [N5_02, getKotobaListN5Part02()],
+    ]);
 };

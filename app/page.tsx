@@ -6,12 +6,12 @@ import { Kotoba } from "./dto/kotoba-kanji";
 import { SelectedAnswer } from "./dto/selected-answer";
 import { AnswerStatus, startingAnswerStatus } from "./dto/answer-status";
 import Swal from "sweetalert2";
-import { getKotobaListPart01 } from "./data/n5/part-01";
 import SelectLevel from "./select-level";
+import { getKotobaListN5Part01 } from "./data/n5/part-01";
 
 export default function Home() {
     const [kotobaList] = useState<Kotoba[]>(() => {
-        const data = [...getKotobaListPart01()];
+        const data = [...getKotobaListN5Part01()];
         shuffleFisherYates(data);
         return data;
     });

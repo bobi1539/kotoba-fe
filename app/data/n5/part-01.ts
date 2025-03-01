@@ -1,10 +1,10 @@
 import { Kotoba } from "@/app/dto/kotoba-kanji";
 
-export const getKotobaListPart01 = (): Kotoba[] => {
-    return kotobaListPart01;
+export const getKotobaListN5Part01 = (): Kotoba[] => {
+    return kotobaListN5Part01;
 };
 
-const kotobaListPart01: Kotoba[] = [
+const kotobaListN5Part01: Kotoba[] = [
     {
         id: 1,
         kanji: "おはよう",
