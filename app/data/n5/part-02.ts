@@ -431,4 +431,58 @@ const kotobaListN5Part02: Kotoba[] = [
         hiragana: "ふゆ",
         meaning: "musim dingin",
     },
+    {
+        id: 72,
+        kanji: "夏休み",
+        hiragana: "なつやすみ",
+        meaning: "libur musim panas",
+    },
+    {
+        id: 73,
+        kanji: "春休み",
+        hiragana: "はるやすみ",
+        meaning: "libur musim semi",
+    },
+    {
+        id: 74,
+        kanji: "冬休み",
+        hiragana: "ふゆやすみ",
+        meaning: "libur musim dingin",
+    },
+    {
+        id: 75,
+        kanji: "毎朝",
+        hiragana: "まいあさ",
+        meaning: "setiap pagi",
+    },
+    {
+        id: 76,
+        kanji: "毎日",
+        hiragana: "まいにち",
+        meaning: "setiap hari",
+    },
+    {
+        id: 77,
+        kanji: "毎晩",
+        hiragana: "まいばん",
+        meaning: "setiap malam",
+    },
+    {
+        id: 78,
+        kanji: "毎週",
+        hiragana: "まいしゅう",
+        meaning: "setiap minggu",
+    },
+    {
+        id: 79,
+        kanji: "毎月",
+        hiragana: "まいつき",
+        meaning: "setiap bulan",
+    },
+    {
+        id: 80,
+        kanji: "毎年",
+        hiragana: "まいとし",
+        meaning: "setiap tahun",
+    },
 ];
