@@ -200,8 +200,8 @@ export default function Home() {
                         <p className="text-[30px] lg:text-[50px] text-center">{question?.kanji}</p>
                     ) : (
                         <div className="p-2 group">
-                            <p className="text-[30px] lg:text-[50px] text-center capitalize">{question?.meaning}</p>
-                            <p className="text-sm lg:text-base text-center hidden group-hover:block">{question?.hiragana}</p>
+                            <p className="text-[30px] lg:text-[50px] text-center capitalize leading-12">{question?.meaning}</p>
+                            <p className="text-sm lg:text-2xl text-center hidden group-hover:block mt-2">{question?.hiragana}</p>
                         </div>
                     )}
                 </div>
@@ -223,7 +223,7 @@ export default function Home() {
                                         <p className="text-center font-light text-gray-700 text-[10px] lg:text-xs mt-1">{answer.hiragana}</p>
                                     </div>
                                 ) : (
-                                    <p className="text-center font-light text-gray-900 capitalize text-xs lg:text-base leading-4">{answer.kanji}</p>
+                                    <p className="text-center font-light text-gray-900 capitalize text-xs lg:text-xl leading-5">{answer.kanji}</p>
                                 )}
                             </div>
                         </button>
