@@ -179,13 +179,11 @@ export default function Home() {
                         </button>
                     </div>
                 </div>
-                <div className="flex flex-col lg:flex-row gap-1 lg:gap-4">
-                    <div className="bg-gray-300 flex justify-between items-center gap-4 px-10 py-2 lg:py-0">
-                        <h1>Benar : {answerStatus.correct}</h1>
-                        <h1>Salah : {answerStatus.incorrect}</h1>
-                        <h1>Sisa : {answerStatus.remaining}</h1>
-                        <h1>{answerStatus.correctPercentage}%</h1>
-                    </div>
+                <div className="bg-gray-300 flex justify-between items-center gap-4 px-10 py-2 lg:py-0 lg:w-[450px]">
+                    <h1>Benar : {answerStatus.correct}</h1>
+                    <h1>Salah : {answerStatus.incorrect}</h1>
+                    <h1>Sisa : {answerStatus.remaining}</h1>
+                    <h1>{answerStatus.correctPercentage}%</h1>
                 </div>
             </div>
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 pt-5 lg:pt-24">
@@ -201,9 +199,9 @@ export default function Home() {
                     {isKanjiToMeaning ? (
                         <p className="text-[30px] lg:text-[50px] text-center">{question?.kanji}</p>
                     ) : (
-                        <div className="p-2">
+                        <div className="p-2 group">
                             <p className="text-[30px] lg:text-[50px] text-center capitalize">{question?.meaning}</p>
-                            <p className="text-sm lg:text-base text-center">{question?.hiragana}</p>
+                            <p className="text-sm lg:text-base text-center hidden group-hover:block">{question?.hiragana}</p>
                         </div>
                     )}
                 </div>
