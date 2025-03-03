@@ -1,6 +1,7 @@
-import { N5_01, N5_02 } from "../constant/general";
+import { N5_01, N5_02, N5_03 } from "../constant/general";
 import { getKotobaListN5Part01 } from "../data/n5/part-01";
 import { getKotobaListN5Part02 } from "../data/n5/part-02";
+import { getKotobaListN5Part03 } from "../data/n5/part-03";
 import { Kotoba } from "../dto/kotoba-kanji";
 
 export const getUniqueRandomNumbers = (min: number, max: number, count: number, excludeIndex: number): number[] => {
@@ -27,5 +28,6 @@ export const getSelectLevelMap = (): Map<string, Kotoba[]> => {
     return new Map([
         [N5_01, getKotobaListN5Part01()],
         [N5_02, getKotobaListN5Part02()],
+        [N5_03, getKotobaListN5Part03()],
     ]);
 };
