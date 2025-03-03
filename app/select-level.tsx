@@ -18,7 +18,6 @@ export default function SelectLevel(props: Readonly<SelectLevelProps>) {
     ];
 
     const handleClickSetCurrentLevel = (level: string): void => {
-        console.log("level : ", level);
         props.setCurrentLevel(level);
         props.closeModal();
     };
