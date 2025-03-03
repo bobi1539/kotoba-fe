@@ -21,6 +21,7 @@ export default function Home() {
     const [nextQuestion, setNextQuestion] = useState<number>(0);
     const [isModalSelectLevelOpen, setIsModalSelectLevelOpen] = useState<boolean>(false);
     const [isKanjiToMeaning, setIsKanjiToMeaning] = useState<boolean>(true);
+    const [isShowHiraganaInQuestion, setIsShowHiraganaInQuestion] = useState<boolean>(false);
 
     useEffect((): void => {
         const dataKotobaList = getSelectLevelMap().get(currentLevel) ?? [];
@@ -199,9 +200,9 @@ export default function Home() {
                     {isKanjiToMeaning ? (
                         <p className="text-[30px] lg:text-[50px] text-center">{question?.kanji}</p>
                     ) : (
-                        <div className="p-2 group">
+                        <div className="p-2" onMouseEnter={() => setIsShowHiraganaInQuestion(true)} onMouseLeave={() => setIsShowHiraganaInQuestion(false)} onClick={() => setIsShowHiraganaInQuestion(!isShowHiraganaInQuestion)}>
                             <p className="text-[30px] lg:text-[50px] text-center capitalize leading-12">{question?.meaning}</p>
-                            <p className="text-sm lg:text-2xl text-center hidden group-hover:block mt-2">{question?.hiragana}</p>
+                            {isShowHiraganaInQuestion && <p className="text-sm lg:text-2xl text-center mt-2">{question?.hiragana}</p>}
                         </div>
                     )}
                 </div>
