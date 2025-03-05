@@ -1,7 +1,7 @@
 "use client";
 
 import Modal from "./component/modal/modal";
-import { N5_01, N5_02, N5_03 } from "./constant/general";
+import { N5_01, N5_02, N5_03, N5_04 } from "./constant/general";
 import { JLPTLevel } from "./dto/jlpt-level";
 
 interface SelectLevelProps {
@@ -13,7 +13,7 @@ export default function SelectLevel(props: Readonly<SelectLevelProps>) {
     const jlptLevelList: JLPTLevel[] = [
         {
             name: "JLPT N5",
-            list: [N5_01, N5_02, N5_03],
+            list: [N5_01, N5_02, N5_03, N5_04],
         },
     ];
 
@@ -32,6 +32,7 @@ export default function SelectLevel(props: Readonly<SelectLevelProps>) {
                             <th className="text-center w-10">1</th>
                             <th className="text-center w-10">2</th>
                             <th className="text-center w-10">3</th>
+                            <th className="text-center w-10">4</th>
                         </tr>
                     </thead>
                     <tbody>
