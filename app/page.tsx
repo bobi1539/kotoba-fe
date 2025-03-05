@@ -224,7 +224,7 @@ export default function Home() {
                                         <p className="text-center font-light text-gray-700 text-[10px] lg:text-xs mt-1">{answer.hiragana}</p>
                                     </div>
                                 ) : (
-                                    <p className="text-center font-light text-gray-900 capitalize text-xs lg:text-xl leading-5">{answer.kanji}</p>
+                                    <p className="text-center font-light text-gray-900 capitalize text-base lg:text-xl leading-5">{answer.kanji}</p>
                                 )}
                             </div>
                         </button>
