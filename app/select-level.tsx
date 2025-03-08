@@ -1,7 +1,7 @@
 "use client";
 
 import Modal from "./component/modal/modal";
-import { N5_01, N5_02, N5_03, N5_04 } from "./constant/general";
+import { N4_01, N5_01, N5_02, N5_03, N5_04 } from "./constant/general";
 import { JLPTLevel } from "./dto/jlpt-level";
 
 interface SelectLevelProps {
@@ -14,6 +14,10 @@ export default function SelectLevel(props: Readonly<SelectLevelProps>) {
         {
             name: "JLPT N5",
             list: [N5_01, N5_02, N5_03, N5_04],
+        },
+        {
+            name: "JLPT N4",
+            list: [N4_01],
         },
     ];
 
@@ -37,7 +41,7 @@ export default function SelectLevel(props: Readonly<SelectLevelProps>) {
                     </thead>
                     <tbody>
                         {jlptLevelList.map((jlptLevel) => (
-                            <tr key={jlptLevel.name} className="p-2">
+                            <tr key={jlptLevel.name} className="p-2 border-b border-b-gray-300">
                                 <td>{jlptLevel.name}</td>
                                 {jlptLevel.list.map((level, index) => (
                                     <td key={index + 1} className="text-center p-1">

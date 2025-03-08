@@ -1,4 +1,5 @@
-import { N5_01, N5_02, N5_03, N5_04 } from "../constant/general";
+import { N4_01, N5_01, N5_02, N5_03, N5_04 } from "../constant/general";
+import { getKotobaListN4Part01 } from "../data/n4/part-01";
 import { getKotobaListN5Part01 } from "../data/n5/part-01";
 import { getKotobaListN5Part02 } from "../data/n5/part-02";
 import { getKotobaListN5Part03 } from "../data/n5/part-03";
@@ -31,5 +32,6 @@ export const getSelectLevelMap = (): Map<string, Kotoba[]> => {
         [N5_02, getKotobaListN5Part02()],
         [N5_03, getKotobaListN5Part03()],
         [N5_04, getKotobaListN5Part04()],
+        [N4_01, getKotobaListN4Part01()],
     ]);
 };
