@@ -137,4 +137,52 @@ const kotobaListN4Part01: Kotoba[] = [
         hiragana: "かお",
         meaning: "Wajah",
     },
+    {
+        id: 23,
+        kanji: "首",
+        hiragana: "くび",
+        meaning: "Leher",
+    },
+    {
+        id: 24,
+        kanji: "声",
+        hiragana: "こえ",
+        meaning: "Suara",
+    },
+    {
+        id: 25,
+        kanji: "死ぬ",
+        hiragana: "しぬ",
+        meaning: "Mati",
+    },
+    {
+        id: 26,
+        kanji: "色",
+        hiragana: "いろ",
+        meaning: "Warna",
+    },
+    {
+        id: 27,
+        kanji: "赤",
+        hiragana: "あか",
+        meaning: "Merah",
+    },
+    {
+        id: 28,
+        kanji: "黒",
+        hiragana: "くろ",
+        meaning: "Hitam",
+    },
+    {
+        id: 29,
+        kanji: "茶色",
+        hiragana: "ちゃいろ",
+        meaning: "Warna Coklat",
+    },
+    {
+        id: 30,
+        kanji: "銀色",
+        hiragana: "ぎんいろ",
+        meaning: "Warna Perak",
+    },
 ];
