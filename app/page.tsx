@@ -95,6 +95,7 @@ export default function Home() {
         }
         setIsButtonAnswerDisabled(!isButtonAnswerDisabled);
         setIsButtonNextDisabled(!isButtonNextDisabled);
+        setIsShowHiraganaInQuestion(true);
     };
 
     const setCorrectAnswer = (answer: Kotoba): void => {
@@ -141,6 +142,7 @@ export default function Home() {
         setIsButtonAnswerDisabled(!isButtonAnswerDisabled);
         setIsButtonNextDisabled(!isButtonNextDisabled);
         setSelectedAnswer(undefined);
+        setIsShowHiraganaInQuestion(false);
     }, [isButtonAnswerDisabled, isButtonNextDisabled]);
 
     useEffect(() => {
