@@ -9,7 +9,7 @@ const kotobaListN4Part01: Kotoba[] = [
         id: 1,
         kanji: "家",
         hiragana: "いえ",
-        meaning: "Rumah",
+        meaning: "rumah",
     },
     {
         id: 2,
@@ -123,7 +123,7 @@ const kotobaListN4Part01: Kotoba[] = [
         id: 20,
         kanji: "心",
         hiragana: "こころ",
-        meaning: "Jantung",
+        meaning: "Jantung / Hati",
     },
     {
         id: 21,
@@ -405,7 +405,7 @@ const kotobaListN4Part01: Kotoba[] = [
         id: 67,
         kanji: "建てる",
         hiragana: "たてる",
-        meaning: "membangun (bangunan)",
+        meaning: "Membangun (bangunan)",
     },
     {
         id: 68,
@@ -424,5 +424,35 @@ const kotobaListN4Part01: Kotoba[] = [
         kanji: "病気",
         hiragana: "びょうき",
         meaning: "penyakit",
+    },
+    {
+        id: 71,
+        kanji: "病院",
+        hiragana: "びょういん",
+        meaning: "rumah sakit",
+    },
+    {
+        id: 72,
+        kanji: "医者",
+        hiragana: "いしゃ",
+        meaning: "dokter",
+    },
+    {
+        id: 73,
+        kanji: "学者",
+        hiragana: "がくしゃ",
+        meaning: "ilmuwan",
+    },
+    {
+        id: 74,
+        kanji: "薬",
+        hiragana: "くすり",
+        meaning: "obat",
+    },
+    {
+        id: 75,
+        kanji: "肉",
+        hiragana: "にく",
+        meaning: "daging",
     },
 ];
