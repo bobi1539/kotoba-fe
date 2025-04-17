@@ -32,7 +32,12 @@ export default function Home() {
         setIsButtonAnswerDisabled(false);
         setIsButtonNextDisabled(true);
         setSelectedAnswer(undefined);
-        setAnswerStatus(startingAnswerStatus());
+        setAnswerStatus({
+            correct: 0,
+            incorrect: 0,
+            remaining: dataKotobaList.length,
+            correctPercentage: 0,
+        });
     }, [currentLevel]);
 
     useEffect((): void => {
