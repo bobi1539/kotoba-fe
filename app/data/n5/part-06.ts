@@ -47,4 +47,10 @@ const kotobaListN5Part06: Kotoba[] = [
         hiragana: "ほん",
         meaning: "Buku",
     },
+    {
+        id: 108,
+        kanji: "雪",
+        hiragana: "ゆき",
+        meaning: "Salju",
+    },
 ];
