@@ -9,7 +9,7 @@ export const startingAnswerStatus = (): AnswerStatus => {
     return {
         correct: 0,
         incorrect: 0,
-        remaining: 100,
+        remaining: 0,
         correctPercentage: 0,
     };
 };
