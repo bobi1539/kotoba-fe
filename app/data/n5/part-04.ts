@@ -435,7 +435,7 @@ const kotobaListN5Part04: Kotoba[] = [
         id: 72,
         kanji: "早い",
         hiragana: "はやい",
-        meaning: "Cepat",
+        meaning: "Lebih awal",
     },
     {
         id: 73,

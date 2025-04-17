@@ -455,4 +455,34 @@ const kotobaListN4Part01: Kotoba[] = [
         hiragana: "にく",
         meaning: "daging",
     },
+    {
+        id: 76,
+        kanji: "料金",
+        hiragana: "りょうきん",
+        meaning: "Biaya, tarif",
+    },
+    {
+        id: 77,
+        kanji: "料理",
+        hiragana: "りょうり",
+        meaning: "Masakan, memasak",
+    },
+    {
+        id: 78,
+        kanji: "味",
+        hiragana: "あじ",
+        meaning: "Rasa",
+    },
+    {
+        id: 79,
+        kanji: "ご飯",
+        hiragana: "ごはん",
+        meaning: "Nasi / Makan",
+    },
+    {
+        id: 80,
+        kanji: "質",
+        hiragana: "しつ",
+        meaning: "Kualitas",
+    },
 ];
