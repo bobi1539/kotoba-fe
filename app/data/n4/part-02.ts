@@ -97,8 +97,8 @@ const kotobaListN4Part02: Kotoba[] = [
     },
     {
         id: 66,
-        kanji: "所",
-        hiragana: "ところ",
+        kanji: "場所",
+        hiragana: "ばしょ",
         meaning: "Tempat",
     },
     {
