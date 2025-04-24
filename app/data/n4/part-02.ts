@@ -185,4 +185,34 @@ const kotobaListN4Part02: Kotoba[] = [
         hiragana: "しつ",
         meaning: "Kualitas",
     },
+    {
+        id: 81,
+        kanji: "質問",
+        hiragana: "しつもん",
+        meaning: "pertanyaan",
+    },
+    {
+        id: 82,
+        kanji: "問題",
+        hiragana: "もんだい",
+        meaning: "masalah, soal",
+    },
+    {
+        id: 83,
+        kanji: "答える",
+        hiragana: "こたえる",
+        meaning: "menjawab",
+    },
+    {
+        id: 84,
+        kanji: "漢字",
+        hiragana: "かんじ",
+        meaning: "kanji",
+    },
+    {
+        id: 85,
+        kanji: "赤字",
+        hiragana: "あかじ",
+        meaning: "defisit, kerugian",
+    },
 ];
