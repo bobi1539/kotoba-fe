@@ -215,4 +215,34 @@ const kotobaListN4Part02: Kotoba[] = [
         hiragana: "あかじ",
         meaning: "defisit, kerugian",
     },
+    {
+        id: 86,
+        kanji: "研ぐ",
+        hiragana: "とぐ",
+        meaning: "mengasah (pisau)",
+    },
+    {
+        id: 87,
+        kanji: "研究",
+        hiragana: "けんきゅう",
+        meaning: "penelitian",
+    },
+    {
+        id: 88,
+        kanji: "自分",
+        hiragana: "じぶん",
+        meaning: "diri sendiri",
+    },
+    {
+        id: 89,
+        kanji: "習う",
+        hiragana: "ならう",
+        meaning: "belajar (secara langsung/praktik)",
+    },
+    {
+        id: 90,
+        kanji: "教室",
+        hiragana: "きょうしつ",
+        meaning: "ruang kelas",
+    },
 ];
