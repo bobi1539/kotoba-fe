@@ -245,4 +245,34 @@ const kotobaListN4Part02: Kotoba[] = [
         hiragana: "きょうしつ",
         meaning: "ruang kelas",
     },
+    {
+        id: 91,
+        kanji: "勉強",
+        hiragana: "べんきょう",
+        meaning: "belajar",
+    },
+    {
+        id: 92,
+        kanji: "地図",
+        hiragana: "ちず",
+        meaning: "peta",
+    },
+    {
+        id: 93,
+        kanji: "工場",
+        hiragana: "こうじょう / こうば",
+        meaning: "pabrik",
+    },
+    {
+        id: 94,
+        kanji: "文",
+        hiragana: "ぶん",
+        meaning: "kalimat",
+    },
+    {
+        id: 95,
+        kanji: "説明",
+        hiragana: "せつめい",
+        meaning: "penjelasan",
+    },
 ];
