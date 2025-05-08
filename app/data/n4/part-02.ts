@@ -275,4 +275,34 @@ const kotobaListN4Part02: Kotoba[] = [
         hiragana: "せつめい",
         meaning: "penjelasan",
     },
+    {
+        id: 96,
+        kanji: "し験",
+        hiragana: "しけん",
+        meaning: "ujian",
+    },
+    {
+        id: 97,
+        kanji: "考える",
+        hiragana: "かんがえる",
+        meaning: "mempertimbangkan",
+    },
+    {
+        id: 98,
+        kanji: "教える",
+        hiragana: "おしえる",
+        meaning: "mengajar",
+    },
+    {
+        id: 99,
+        kanji: "英語",
+        hiragana: "えいご",
+        meaning: "bahasa inggris",
+    },
+    {
+        id: 100,
+        kanji: "本屋",
+        hiragana: "ほんや",
+        meaning: "toko buku",
+    },
 ];
