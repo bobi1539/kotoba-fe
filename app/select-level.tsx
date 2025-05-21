@@ -1,7 +1,7 @@
 "use client";
 
 import Modal from "./component/modal/modal";
-import { N4_01, N4_02, N5_01, N5_02, N5_03, N5_04, N5_05, N5_06 } from "./constant/general";
+import { N4_01, N4_02, N4_03, N5_01, N5_02, N5_03, N5_04, N5_05, N5_06 } from "./constant/general";
 import { JLPTLevel } from "./dto/jlpt-level";
 
 interface SelectLevelProps {
@@ -17,7 +17,7 @@ export default function SelectLevel(props: Readonly<SelectLevelProps>) {
         },
         {
             name: "JLPT N4",
-            list: [N4_01, N4_02],
+            list: [N4_01, N4_02, N4_03],
         },
     ];
 
